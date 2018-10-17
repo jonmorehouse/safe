@@ -1,0 +1,8 @@
+FROM golang:latest
+
+RUN go get gopkg.in/yaml.v2
+
+ADD build /build
+ADD . /src
+RUN mkdir -p /go/src/github.com/jonmorehouse && \
+	ln -s /src /go/src/github.com/jonmorehouse/safe

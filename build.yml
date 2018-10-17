@@ -1,0 +1,6 @@
+---
+name: safe
+builds:
+  - kind: bundle
+    latest: true
+    dockerfile: Dockerfile.build

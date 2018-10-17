@@ -1,21 +1,47 @@
 # Safe
 
-A command line tool for managing secrets with `git`
+`safe` is a command line tool for interacting with encrypted files. It provides a configuration file for tracking files and recipients.
 
-## Note
+`safe` uses `gpg` v1 to encrypt files. `safe` provides both a CLI and go library for managing and interacting with protected files
 
-This isn't real software yet; keep tabs over at: github.com/jonmorehouse/safe/issues
+## Getting Started
 
+In order to get started with `safe`, a `safe.yml` file must be created within a repository:
 
-## CLI Overview
+## Command Line Usage
 
-- get: print a single key from a secrets file
-- edit: edit a secret file
-- decrypt: decrypt a file to either stdout or another file
-- join: add yourself to the keyring, asking to be accepted
-- accept: accept a user into the keyring, re-encrypting all files
-- kick: remove someone from the keyring
-- create-keyring: create a new keyring
-- create: create a new encrypted file
-- destroy-keyring: destroy an entire keyring
-- destroy: destroys a single file
+### Create / Edit a file
+
+To create a file or edit a previously encrypted file:
+
+```bash
+$ safe edit foo.md
+```
+
+### Protect a File
+
+To encrypt and track a previously unencrypted file, `safe` provides `protect`:
+
+```bash
+$ safe protect foo.md
+```
+
+The `safe` CLI will add this file to it's list of tracked files, encrypt it and delete the original.
+
+### Exec
+
+`safe` provides a way to export secrets from a protected `yaml` file into an environment.
+
+Given the `safe` protected file: `config.yml` with the contents:
+
+```yaml
+---
+key: value
+```
+
+When `safe exec` is run with a command, the environment variable `KEY=value` will be exported:
+
+```bash
+$ safe exec config.yml.gpg.asc env | grep KEY
+KEY=value
+```
