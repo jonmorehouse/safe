@@ -1,0 +1,13 @@
+---
+# recipients for each safe protected file to be
+recipients:
+  - foo@123.com
+
+# overrides allow you to specify a specific set of recipients for a file
+overrides:
+  - docs/secret/foo.md:
+    - bar@123.com
+
+# files is a list of all known files to `safe`
+files:
+  - docs/secret/foo_123.md
