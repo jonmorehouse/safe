@@ -45,3 +45,11 @@ When `safe exec` is run with a command, the environment variable `KEY=value` wil
 $ safe exec config.yml.gpg.asc env | grep KEY
 KEY=value
 ```
+
+### Reencrypt a file
+
+To reencrypt one or all tracked files with the current list of recipients, `safe` provides a `reencrypt` command.
+
+```bash
+$ safe reencrypt -all
+```
